@@ -102,7 +102,11 @@ def string_to_clicked(s):
 
         if (step % 2 == 0):
             cell = 1
-        clicked[ord(move[0]) - ord('a') - 1][int(move[1:]) - 1] = cell
+        x = ord(move[0]) - ord('a') - 1
+        if (move[0] > 'i'):
+            x -= 1
+        y = int(move[1:]) - 1
+        clicked[x][y] = cell
         step += 1
         
     if step % 2 == 0:
