@@ -194,18 +194,17 @@ def run_model(model, log):
 
     return(to_out(cell))
 
+if __name__ == "__main__":
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    torch.backends.cudnn.benchmark = True
 
+    model = CNN()
+    model.load_state_dict(torch.load("/home/nata/model_rand_3", map_location='cpu'))
+    model.eval()
 
+    log = sys.stdin.readline().decode()
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-torch.backends.cudnn.benchmark = True
+    ans = run_model(model, log)
 
-model = CNN()
-model.load_state_dict(torch.load("/home/nata/model_rand_3", map_location='cpu'))
-model.eval()
-
-log = input()
-
-ans = run_model(model, log)
-
-print(ans)
+    sys.stdout.write(ans.encode())
+    sys.stdout.flush()
